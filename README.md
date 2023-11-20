@@ -19,18 +19,19 @@ Dotnet(7.0)
 
 ### Fonctionnalitées
 
-4 types machines (mineur, fondrie, polisseur, crafteur)
-Des mineraux (un au minimum)
-Transmission d'items en machines en machines
-Recettes simples (minerais fondu, minerais polis, plaque de métal)
-Terrain statique
-Movement du joueur (gauche, droite, bas, haut)
+- 4 types machines (mineur, fondrie, polisseur, crafteur)
+- Des mineraux (un au minimum)
+- Transmission d'items en machines en machines
+- Recettes simples (minerais fondu, minerais polis, plaque de métal)
+- Placer les machines sur le terrain
+- Terrain statique
+- Movement du joueur (gauche, droite, bas, haut)
 
 #### Si le temps le permets
 
-Génération du terrain procédurale
-Ennemis qui charge (Roaming)
-Inventaire du joueur
+- Génération du terrain procédurale
+- Ennemis qui charge (Roaming)
+- Inventaire du joueur
 
 ### environment de travail
 
