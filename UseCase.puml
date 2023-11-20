@@ -1,0 +1,58 @@
+@startuml
+skinparam nodesep 5
+skinparam ranksep 20
+
+actor "Player" as player
+:Miner: as Miner << Game >>
+:Smelter: as Smelter << Game >>
+:Polisher: as Polisher << Game >>
+:Crafter: as Crafter << Game >>
+:Game: as game
+
+rectangle Terrain{
+    usecase "Generate" as generate
+}
+
+
+rectangle Movement{
+usecase "Go up" as up
+usecase "Go down" as down
+usecase "Go left" as left
+usecase "Go right" as right
+}
+
+rectangle Machines{
+    usecase "Use a machine" as useMachine
+    usecase "Place a machine" as placeMachine
+    usecase "Transfer item" as transfer
+}
+rectangle Crafting{
+    usecase "Mine mineral" as mine
+    usecase "Smelt mineral" as smelt
+    usecase "Polish bar" as polish
+    usecase "craft metal Plate" as craft
+}
+
+
+player -d-> up
+player -> down
+player -> left
+player -> right
+
+player -u-> placeMachine
+player -u-> useMachine
+
+Miner -u-> mine
+Smelter -u-> smelt
+Polisher -u-> polish
+Crafter -u-> craft
+
+Miner -d-> transfer 
+transfer -d-> Smelter
+Smelter -d-> transfer 
+transfer -d-> Polisher
+Polisher -d-> transfer 
+transfer -d-> Crafter
+
+game -> generate
+@enduml
