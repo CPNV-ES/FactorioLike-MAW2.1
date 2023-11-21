@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MechanoCraft.Input;
+using System;
 
 namespace MechanoCraft
 {
@@ -20,6 +22,11 @@ namespace MechanoCraft
         {
             // TODO: Add your initialization logic here
 
+            InputHandler.GetInstance().AddInputListener(Keys.Escape, () =>
+            {
+                Exit();
+            });
+
             base.Initialize();
         }
 
@@ -32,11 +39,9 @@ namespace MechanoCraft
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
             // TODO: Add your update logic here
 
+            InputHandler.GetInstance().ProcessListeners();
             base.Update(gameTime);
         }
 
