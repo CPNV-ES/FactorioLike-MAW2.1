@@ -36,6 +36,22 @@ namespace MechanoCraft.Input
             }
         }
 
+        public void RemoveInputListener(Keys key)
+        {
+            if(keyboardListeners != null && keyboardListeners.ContainsKey(key))
+            {
+                keyboardListeners.Remove(key);
+            }
+        }
+
+        public void RemoveInputListener(Buttons button)
+        {
+            if(gamepadListeners != null && gamepadListeners.ContainsKey(button))
+            {
+                gamepadListeners.Remove(button);
+            }
+        }
+
         public void ProcessListeners()
         {
             KeyboardState keyboardState = Keyboard.GetState();
