@@ -1,6 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
+using MonoGame.Extended.Entities;
+using MonoGame.Extended;
 
 namespace MechanoCraft
 {
@@ -8,24 +11,38 @@ namespace MechanoCraft
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        private World _world;
+        private Dictionary<SpriteRenderer, Vector2> spriteRenderers = new Dictionary<SpriteRenderer, Vector2>(); 
 
         public MechanoCraft()
         {
-            _graphics = new GraphicsDeviceManager(this);
+            _graphics = new GraphicsDeviceManager(this);     
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
 
+            // TODO: Add your initialization logic here
+            _world = new WorldBuilder().AddSystem(new RenderSystem(GraphicsDevice)).Build();
+            Components.Add(_world);
+            spriteRenderers.Add(new SpriteRenderer(Content.Load<Texture2D>("untitled"), Color.White), new Vector2(10, 10));
+            spriteRenderers.Add(new SpriteRenderer(Content.Load<Texture2D>("crafter"), Color.White), new Vector2(80, 10));
+            spriteRenderers.Add(new SpriteRenderer(Content.Load<Texture2D>("minerai"), Color.White), new Vector2(10, 10));
+            spriteRenderers.Add(new SpriteRenderer(Content.Load<Texture2D>("polish"), Color.White), new Vector2(60, 10));
+            spriteRenderers.Add(new SpriteRenderer(Content.Load<Texture2D>("smelter"), Color.White), new Vector2(40, 10));
+            foreach (var spriteRenderer in spriteRenderers)
+            {
+                var entity = _world.CreateEntity();
+                entity.Attach(new Transform2(spriteRenderer.Value));
+                entity.Attach(spriteRenderer.Key);
+            }
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
         }
@@ -36,16 +53,13 @@ namespace MechanoCraft
                 Exit();
 
             // TODO: Add your update logic here
-
+            _world.Update(gameTime);
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Add your drawing code here
-
+            _world.Draw(gameTime);
             base.Draw(gameTime);
         }
     }
