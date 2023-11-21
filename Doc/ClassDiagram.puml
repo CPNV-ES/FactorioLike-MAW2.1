@@ -1,0 +1,20 @@
+@startuml
+class RenderSystem {
+    + RenderSystem(graphicsDevice:GraphicsDevice)
+    + <<override>> Initialize(mapperService:IComponentMapperService) : void
+    + <<override>> Draw(gameTime:GameTime) : void
+}
+RenderSystem --> SpriteRenderer
+class SpriteRenderer {
+    + Sprite : Texture2D <<get>> <<set>>
+    + Color : Color <<get>> <<set>>
+    + Flip : bool <<get>> <<set>>
+    + SpriteRenderer(sprite:Texture2D, color:Color, flip:bool)
+}
+
+class MechanoCraft {
+    + MechanoCraft()
+}
+MechanoCraft --> RenderSystem
+
+@enduml
