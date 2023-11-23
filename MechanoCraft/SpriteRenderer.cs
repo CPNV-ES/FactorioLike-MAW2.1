@@ -8,13 +8,13 @@ namespace MechanoCraft
         Texture2D sprite;
         Color color;
         bool flip;
-
-        public SpriteRenderer(Texture2D sprite, Color color, bool flip = false )
+        int layerId;
+        public SpriteRenderer(Texture2D sprite, Color color, bool flip = false, int layerId = 0)
         {
             Sprite = sprite;
             Color = color;
             Flip = flip;
-
+            Layer = layerId; 
         }
 
         public Texture2D Sprite 
@@ -31,6 +31,11 @@ namespace MechanoCraft
         { 
             get { return flip; } 
             set {  flip = value; } 
+        }
+        public int Layer 
+        { 
+            get { return layerId; } 
+            set { layerId = value; } 
         }
     }
 }
