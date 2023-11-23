@@ -27,9 +27,10 @@ namespace MechanoCraft
             // TODO: Add your initialization logic here
             _world = new WorldBuilder().AddSystem(new RenderSystem(GraphicsDevice)).Build();
             Components.Add(_world);
-            spriteRenderers.Add(new SpriteRenderer(Content.Load<Texture2D>("untitled"), Color.White), new Vector2(10, 10));
-            spriteRenderers.Add(new SpriteRenderer(Content.Load<Texture2D>("crafter"), Color.White), new Vector2(80, 10));
             spriteRenderers.Add(new SpriteRenderer(Content.Load<Texture2D>("minerai"), Color.White), new Vector2(10, 10));
+            spriteRenderers.Add(new SpriteRenderer(Content.Load<Texture2D>("MinerShadow"), Color.White), new Vector2(10, 10));
+            spriteRenderers.Add(new SpriteRenderer(Content.Load<Texture2D>("Miner"), Color.White), new Vector2(10, 10));
+            spriteRenderers.Add(new SpriteRenderer(Content.Load<Texture2D>("crafter"), Color.White), new Vector2(80, 10));
             spriteRenderers.Add(new SpriteRenderer(Content.Load<Texture2D>("polish"), Color.White), new Vector2(60, 10));
             spriteRenderers.Add(new SpriteRenderer(Content.Load<Texture2D>("smelter"), Color.White), new Vector2(40, 10));
             foreach (var spriteRenderer in spriteRenderers)
