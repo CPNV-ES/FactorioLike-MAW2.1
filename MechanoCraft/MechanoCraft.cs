@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using MonoGame.Extended.Entities;
 using MonoGame.Extended;
+using MechanoCraft.Input;
 
 namespace MechanoCraft
 {
@@ -39,6 +40,11 @@ namespace MechanoCraft
                 entity.Attach(new Transform2(spriteRenderer.Value));
                 entity.Attach(spriteRenderer.Key);
             }
+
+            InputHandler.GetInstance().AddInputListener(Keys.Escape, () =>
+            {
+                Exit();
+            });
             base.Initialize();
         }
 
@@ -50,11 +56,9 @@ namespace MechanoCraft
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
             // TODO: Add your update logic here
             _world.Update(gameTime);
+            InputHandler.GetInstance().ProcessListeners();
             base.Update(gameTime);
         }
 
