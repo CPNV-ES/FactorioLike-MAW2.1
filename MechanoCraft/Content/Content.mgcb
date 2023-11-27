@@ -25,6 +25,30 @@
 /processorParam:TextureFormat=Color
 /build:crafter.png
 
+#begin CrafterShadow.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:CrafterShadow.png
+
+#begin IronOre.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:IronOre.png
+
 #begin Miner.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -36,18 +60,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Miner.png
-
-#begin minerai.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:minerai.png
 
 #begin MinerShadow.png
 /importer:TextureImporter
@@ -61,7 +73,7 @@
 /processorParam:TextureFormat=Color
 /build:MinerShadow.png
 
-#begin polish.png
+#begin Polisher.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -71,7 +83,19 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:polish.png
+/build:Polisher.png
+
+#begin PolisherShadow.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:PolisherShadow.png
 
 #begin smelter.png
 /importer:TextureImporter
@@ -84,4 +108,16 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:smelter.png
+
+#begin SmelterShadow.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:SmelterShadow.png
 
