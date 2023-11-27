@@ -42,7 +42,7 @@ namespace MechanoCraft
                 var transform = _transformMapper.Get(entity);
                 var spriteRenderer = _spriteRendererMapper.Get(entity);
 
-                _spriteBatch.Draw(spriteRenderer.Sprite, transform.Position, null, spriteRenderer.Color, transform.Rotation, transform.Position, transform.Scale, SpriteEffects.None, spriteRenderer.Layer);
+                _spriteBatch.Draw(spriteRenderer.Sprite, transform.Position, null, spriteRenderer.Color, transform.Rotation, Vector2.Zero, transform.Scale, SpriteEffects.None, spriteRenderer.Layer);
             }
             _spriteBatch.End();
         }
