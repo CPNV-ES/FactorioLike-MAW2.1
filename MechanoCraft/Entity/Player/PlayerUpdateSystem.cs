@@ -31,7 +31,7 @@ namespace MechanoCraft.Entity.Player
                 foreach (int entity in ActiveEntities)
                 {
                     _transformMapper.Get(entity).Position += UNIT_Y_VECTOR * -PLAYER_BASE_SPEED;
-                }
+        }
             });
 
             InputHandler.GetInstance().AddInputListener(Microsoft.Xna.Framework.Input.Keys.S, () =>
