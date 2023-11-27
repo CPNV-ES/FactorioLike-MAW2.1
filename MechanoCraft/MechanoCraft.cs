@@ -1,12 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System.Collections.Generic;
 using MonoGame.Extended.Entities;
 using MonoGame.Extended;
 using MechanoCraft.Input;
 using MechanoCraft.Render;
 using MonoGame.Extended.Sprites;
+using MechanoCraft.Entity.Player;
 
 namespace MechanoCraft
 {
@@ -27,8 +27,16 @@ namespace MechanoCraft
         {
 
             // TODO: Add your initialization logic here
-            _world = new WorldBuilder().AddSystem(new SpriteRenderSystem(GraphicsDevice)).Build();
+            _world = new WorldBuilder()
+                .AddSystem(new SpriteRenderSystem(GraphicsDevice))
+                .AddSystem(new PlayerUpdateSystem())
+                .Build();
             Components.Add(_world);
+
+            MonoGame.Extended.Entities.Entity playerEntity = _world.CreateEntity();
+            playerEntity.Attach(new Transform2(200f, 200f));
+            playerEntity.Attach(new Sprite(Content.Load<Texture2D>("minerai")));
+            playerEntity.Attach(new Player(100));
 
             InputHandler.GetInstance().AddInputListener(Keys.Escape, () =>
             {
