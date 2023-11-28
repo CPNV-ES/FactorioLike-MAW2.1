@@ -13,7 +13,7 @@ namespace MechanoCraft
     {
         private GraphicsDeviceManager _graphics;
         private World _world;
-
+        private Vector2 gridSize = new Vector2(144, 144);
         public MechanoCraft()
         {
             _graphics = new GraphicsDeviceManager(this);     
@@ -29,7 +29,7 @@ namespace MechanoCraft
             Components.Add(_world);
             InputHandler.GetInstance().AddInputListener(Keys.Space, () =>
             {
-                ObjectPlacerSystem.Place(EntityLoadSystem.LoadSpriteAsEntity("Crafter", _world, Content), new Vector2(Mouse.GetState().X, Mouse.GetState().Y));
+                ObjectPlacerSystem.Place(EntityLoadSystem.LoadSpriteAsEntity("Crafter", _world, Content), new Vector2(Mouse.GetState().X, Mouse.GetState().Y), gridSize);
             });
             InputHandler.GetInstance().AddInputListener(Keys.Escape, () =>
             {
