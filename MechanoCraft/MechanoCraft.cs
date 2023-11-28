@@ -8,6 +8,7 @@ using MechanoCraft.Input;
 using MechanoCraft.Render;
 using MonoGame.Extended.Sprites;
 using MonoGame.Extended.TextureAtlases;
+using MechanoCraft.Placement;
 
 namespace MechanoCraft
 {
@@ -30,13 +31,9 @@ namespace MechanoCraft
             // TODO: Add your initialization logic here
             _world = new WorldBuilder().AddSystem(new SpriteRenderSystem(GraphicsDevice)).Build();
             Components.Add(_world);
-            Entity entity = _world.CreateEntity();
             InputHandler.GetInstance().AddInputListener(Keys.Space, () =>
             {
-                Entity entity1 = _world.CreateEntity();
-                entity1.Attach( new Transform2());
-                entity1.Attach( new Sprite(Content.Load<Texture2D>("Crafter")));
-                entity1.Get<Transform2>().Position = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
+
             });
             InputHandler.GetInstance().AddInputListener(Keys.Escape, () =>
             {
