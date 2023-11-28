@@ -10,12 +10,10 @@ namespace MechanoCraft.Entity.Player
     public class Player
     {
         public int Health = 100;
-        public Sprite PlayerSprite;
 
         public Player(int health)
         {
             Health = health;
-            PlayerSprite = playerSprite;
         }
     }
 }
