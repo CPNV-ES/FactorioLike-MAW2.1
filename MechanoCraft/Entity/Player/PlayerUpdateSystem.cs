@@ -13,11 +13,13 @@ namespace MechanoCraft.Entity.Player
         private ComponentMapper<Sprite> _spriteMapper;
         private ComponentMapper<Player> _playerMapper;
 
+        private readonly OrthographicCamera _orthographicCamera;
         private static readonly Vector2 UNIT_X_VECTOR = new Vector2(1f, 0f);
         private static readonly Vector2 UNIT_Y_VECTOR  = new Vector2(0f, 1f);
         private static readonly float PLAYER_BASE_SPEED = 20f;
-        public PlayerUpdateSystem() : base(Aspect.All(typeof(Transform2), typeof(Sprite), typeof(Player)))
+        public PlayerUpdateSystem(OrthographicCamera orthographicCamera) : base(Aspect.All(typeof(Transform2), typeof(Sprite), typeof(Player)))
         {
+            _orthographicCamera = orthographicCamera;
         }
 
         public override void Initialize(IComponentMapperService mapperService)
@@ -31,7 +33,8 @@ namespace MechanoCraft.Entity.Player
                 foreach (int entity in ActiveEntities)
                 {
                     _transformMapper.Get(entity).Position += UNIT_Y_VECTOR * -PLAYER_BASE_SPEED;
-        }
+                }
+                _orthographicCamera.Move(UNIT_Y_VECTOR * -PLAYER_BASE_SPEED);
             });
 
             InputHandler.GetInstance().AddInputListener(Microsoft.Xna.Framework.Input.Keys.S, () =>
@@ -40,6 +43,7 @@ namespace MechanoCraft.Entity.Player
                 {
                     _transformMapper.Get(entity).Position += UNIT_Y_VECTOR * PLAYER_BASE_SPEED;
                 }
+                _orthographicCamera.Move(UNIT_Y_VECTOR * PLAYER_BASE_SPEED);
             });
             InputHandler.GetInstance().AddInputListener(Microsoft.Xna.Framework.Input.Keys.A, () =>
             {
@@ -47,6 +51,7 @@ namespace MechanoCraft.Entity.Player
                 {
                     _transformMapper.Get(entity).Position += UNIT_X_VECTOR * -PLAYER_BASE_SPEED;
                 }
+                _orthographicCamera.Move(UNIT_X_VECTOR * -PLAYER_BASE_SPEED);
             });
             InputHandler.GetInstance().AddInputListener(Microsoft.Xna.Framework.Input.Keys.D, () =>
             {
@@ -54,11 +59,13 @@ namespace MechanoCraft.Entity.Player
                 {
                     _transformMapper.Get(entity).Position += UNIT_X_VECTOR * PLAYER_BASE_SPEED;
                 }
+                _orthographicCamera.Move(UNIT_X_VECTOR * PLAYER_BASE_SPEED);
             });
         }
 
         public override void Update(GameTime gameTime)
         {
+
             //throw new NotImplementedException();
         }
     }
