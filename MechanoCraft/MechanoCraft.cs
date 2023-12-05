@@ -7,6 +7,8 @@ using MonoGame.Extended;
 using MechanoCraft.Input;
 using MechanoCraft.Render;
 using MonoGame.Extended.Sprites;
+using MechanoCraft.Generator;
+using MonoGame.Extended.Tiled;
 
 namespace MechanoCraft
 {
@@ -27,7 +29,7 @@ namespace MechanoCraft
         {
 
             // TODO: Add your initialization logic here
-            _world = new WorldBuilder().AddSystem(new SpriteRenderSystem(GraphicsDevice)).Build();
+            _world = new WorldBuilder().AddSystem(new SpriteRenderSystem(GraphicsDevice)).AddSystem(new TerrainGenerator(GraphicsDevice, Content.Load<TiledMap>("Terrain/BasicTileMap"))).Build();
             Components.Add(_world);
 
             InputHandler.GetInstance().AddInputListener(Keys.Escape, () =>
