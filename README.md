@@ -94,14 +94,14 @@ assurez vous que le paquet Monogame.Extended.Content.Pipeline soit bien install�
 
 Ensuite, ouvrez le gestionnaire de contenu "Content.mgcb", ensuite cliquez la racine nommée content
 
-![Content](Doc\Images\Content.PNG "Content")
+![Content](Doc/Images/Content.PNG "Content")
 
 Ensuite, allez dans les Propriétées et ajoutez la réference à Monogame.Extended.Content.Pipeline, vous pouvez trouver le fichier .dll sous 
 
 User\.nuget\packages\monogame.extended.content.pipeline\VersionDuPaquet\Tools\Monogame.Extended.Content.Pipeline.dll
 
-![Content](Doc\Images\Propreties.PNG "Content")
-![Content](Doc\Images\Reference.PNG "Content")
+![Content](Doc/Images/Propreties.PNG "Content")
+![Content](Doc/Images/Reference.PNG "Content")
 
 Vous pouvez ensuite ajouter des tile maps et tile sets
 
