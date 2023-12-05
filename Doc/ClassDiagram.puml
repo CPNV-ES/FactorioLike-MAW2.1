@@ -11,10 +11,20 @@ class SpriteRenderer {
     + Flip : bool <<get>> <<set>>
     + SpriteRenderer(sprite:Texture2D, color:Color, flip:bool)
 }
+class TerrainGenerator {
+    + tiledMap : TiledMap
+    + tiledMapRenderer : TiledMapRenderer
+    + TerrainGenerator(graphics:GraphicsDevice, tiledMap:TiledMap)
+    + Dispose() : void
+    + Draw(gameTime:GameTime) : void
+    + Initialize(world:World) : void
+    + Update(gameTime:GameTime) : void
+}
 
 class MechanoCraft {
     + MechanoCraft()
 }
+MechanoCraft --> TerrainGenerator
 MechanoCraft --> RenderSystem
 
 @enduml

@@ -10,6 +10,7 @@
 
 #-------------------------------- References --------------------------------#
 
+/reference:..\..\..\..\..\.nuget\packages\monogame.extended.content.pipeline\3.9.0-alpha0093\tools\MonoGame.Extended.Content.Pipeline.dll
 
 #---------------------------------- Content ---------------------------------#
 
@@ -120,4 +121,14 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:SmelterShadow.png
+
+#begin Terrain/BasicTileMap.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:Terrain/BasicTileMap.tmx
+
+#begin Terrain/BasicTileSet.tsx
+/importer:TiledMapTilesetImporter
+/processor:TiledMapTilesetProcessor
+/build:Terrain/BasicTileSet.tsx
 
