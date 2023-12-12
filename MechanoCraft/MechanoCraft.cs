@@ -1,21 +1,19 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System.Collections.Generic;
 using MonoGame.Extended.Entities;
-using MonoGame.Extended;
 using MechanoCraft.Input;
 using MechanoCraft.Render;
-using MonoGame.Extended.Sprites;
+using MechanoCraft.Placement;
+using MechanoCraft.Loader;
 
 namespace MechanoCraft
 {
     public class MechanoCraft : Game
     {
         private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
         private World _world;
-
+        private Vector2 gridSize = new Vector2(144, 144);
         public MechanoCraft()
         {
             _graphics = new GraphicsDeviceManager(this);     
@@ -29,7 +27,10 @@ namespace MechanoCraft
             // TODO: Add your initialization logic here
             _world = new WorldBuilder().AddSystem(new SpriteRenderSystem(GraphicsDevice)).Build();
             Components.Add(_world);
-
+            InputHandler.GetInstance().AddInputListener(Keys.Space, () =>
+            {
+                ObjectPlacerSystem.Place(EntityLoadSystem.LoadSpriteAsEntity("Crafter", _world, Content), new Vector2(Mouse.GetState().X, Mouse.GetState().Y), gridSize);
+            });
             InputHandler.GetInstance().AddInputListener(Keys.Escape, () =>
             {
                 Exit();
