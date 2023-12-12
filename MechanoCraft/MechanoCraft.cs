@@ -7,6 +7,8 @@ using MonoGame.Extended;
 using MechanoCraft.Input;
 using MechanoCraft.Render;
 using MonoGame.Extended.Sprites;
+using GeonBit.UI;
+using MechanoCraft.UI;
 
 namespace MechanoCraft
 {
@@ -25,11 +27,9 @@ namespace MechanoCraft
 
         protected override void Initialize()
         {
-
             // TODO: Add your initialization logic here
-            _world = new WorldBuilder().AddSystem(new SpriteRenderSystem(GraphicsDevice)).Build();
+            _world = new WorldBuilder().AddSystem(new SpriteRenderSystem(GraphicsDevice)).AddSystem(new UIRenderer(GraphicsDevice,Content)).Build();
             Components.Add(_world);
-
             InputHandler.GetInstance().AddInputListener(Keys.Escape, () =>
             {
                 Exit();
