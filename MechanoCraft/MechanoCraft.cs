@@ -9,6 +9,10 @@ using GeonBit.UI;
 using MechanoCraft.UI;
 using MechanoCraft.Placement;
 using MechanoCraft.Loader;
+using System.Collections.Generic;
+using System;
+using System.Reflection.PortableExecutable;
+using MechanoCraft.Structs;
 
 namespace MechanoCraft
 {
@@ -27,11 +31,13 @@ namespace MechanoCraft
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            _world = new WorldBuilder().AddSystem(new SpriteRenderSystem(GraphicsDevice)).AddSystem(new UIRenderer(GraphicsDevice,Content)).Build();
+            _world = new WorldBuilder().AddSystem(new SpriteRenderSystem(GraphicsDevice)).AddSystem(new UIRenderer(GraphicsDevice,Content)).AddSystem(new UIWorldMachine(GraphicsDevice)).Build();
             Components.Add(_world);
             InputHandler.GetInstance().AddInputListener(Keys.Space, () =>
             {
-                ObjectPlacerSystem.Place(EntityLoadSystem.LoadSpriteAsEntity("Crafter", _world, Content), new Vector2(Mouse.GetState().X, Mouse.GetState().Y), gridSize);
+                Entity entity = EntityLoadSystem.LoadSpriteAsEntity("Crafter", _world, Content);
+                entity.Attach(new Structs.Machine());
+                ObjectPlacerSystem.Place(entity, new Vector2(Mouse.GetState().X, Mouse.GetState().Y), gridSize);
             });
             InputHandler.GetInstance().AddInputListener(Keys.Escape, () =>
             {
