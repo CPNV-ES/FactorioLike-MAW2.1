@@ -14,6 +14,11 @@ namespace MechanoCraft.Input
         private static InputHandler instance;
         private Dictionary<Keys, Action> keyboardListeners;
         private Dictionary<Buttons, Action> gamepadListeners;
+        private Action leftMouseButtonListener;
+        private Action rightMouseButtonListener;
+        private Action middleMouseButtonListener;
+        private Action x1MouseButtonListener;
+        private Action x2MouseButtonListener;
         private InputHandler()
         {
             keyboardListeners = new Dictionary<Keys, Action>();
@@ -33,6 +38,46 @@ namespace MechanoCraft.Input
             if(gamepadListeners != null && !gamepadListeners.ContainsKey(button))
             {
                 gamepadListeners.Add(button, listener);
+            }
+        }
+
+        public void RegisterLeftMouseButtonListener(Action listener)
+        {
+            if (leftMouseButtonListener == null)
+            {
+                leftMouseButtonListener = listener;
+            }
+        }
+
+        public void RegisterRightMouseButtonListener(Action listener)
+        {
+            if(rightMouseButtonListener == null)
+            {
+                rightMouseButtonListener = listener;
+            }
+        }
+
+        public void RegisterMiddleMouseButtonListener(Action listener)
+        {
+            if(middleMouseButtonListener == null)
+            {
+                middleMouseButtonListener = listener;
+            }
+        }
+
+        public void RegisterX1MouseButtonListener(Action listener)
+        {
+            if(x1MouseButtonListener == null)
+            {
+                x1MouseButtonListener = listener;
+            }
+        }
+
+        public void RegisterX2MouseButtonListener(Action listener)
+        {
+            if(x2MouseButtonListener == null)
+            {
+                x2MouseButtonListener = listener;
             }
         }
 
@@ -59,6 +104,8 @@ namespace MechanoCraft.Input
             // We only listen for user 1 at the moment (implement later)
             GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
 
+            MouseState mouseState = Mouse.GetState();
+
             foreach (KeyValuePair<Keys, Action> listener in keyboardListeners)
             {
                 if(keyboardState.IsKeyDown(listener.Key))
@@ -74,6 +121,17 @@ namespace MechanoCraft.Input
                     listener.Value();
                 }
             }
+
+            if (mouseState.LeftButton == ButtonState.Pressed && leftMouseButtonListener != null)
+                leftMouseButtonListener();
+            if (mouseState.RightButton == ButtonState.Pressed && rightMouseButtonListener != null)
+                rightMouseButtonListener();
+            if (mouseState.MiddleButton == ButtonState.Pressed && middleMouseButtonListener != null)
+                middleMouseButtonListener();
+            if (mouseState.XButton1 == ButtonState.Pressed && x1MouseButtonListener != null)
+                x1MouseButtonListener();
+            if (mouseState.XButton2 == ButtonState.Pressed && x2MouseButtonListener != null)
+                x2MouseButtonListener();
         }
 
         public static InputHandler GetInstance()
