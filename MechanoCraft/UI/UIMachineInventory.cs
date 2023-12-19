@@ -19,12 +19,13 @@ namespace MechanoCraft.UI
 {
     public class UIMachineInventory
     {
+        public Panel panel;
         private Panel leftPanel;
         private Panel centerPanel;
         private Panel rightPanel;
         public void BasePanel()
         {
-            Panel panel = new Panel(new Vector2(400, 220), PanelSkin.Default, Anchor.Center);
+            panel = new Panel(new Vector2(400, 220), PanelSkin.Default, Anchor.Center);
             Panel entitiesGroup = new Panel(new Vector2(0, 250), PanelSkin.None, Anchor.Auto);
 
             UserInterface.Active.AddEntity(panel);
@@ -51,6 +52,13 @@ namespace MechanoCraft.UI
             rightPanel.AddChild(new Label("Output", Anchor.TopCenter));
             rightPanel.AddChild(new Panel(new Vector2(64, 64), PanelSkin.Fancy, Anchor.AutoCenter));
 
+        }
+        public void DeletePanel()
+        {
+            if (panel != null && UserInterface.Active.Root.Find(panel.Identifier) != null)
+            {
+                UserInterface.Active.RemoveEntity(panel);
+            }
         }
     }
 }
