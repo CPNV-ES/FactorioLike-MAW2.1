@@ -12,15 +12,13 @@ namespace MechanoCraft.Input
     public class InputHandler
     {
         private static InputHandler instance;
-        private Dictionary<Keys, Action> keyboardListeners;
-        private Dictionary<Keys, Action> pressedKeyboardListeners;
+        private Dictionary<Keys, Dictionary<Action, bool>> keyboardListeners;
         private Dictionary<Buttons, Action> gamepadListeners;
         private KeyboardState currentKeyboardState;
         private KeyboardState oldKeyboardState;
         private InputHandler()
         {
-            keyboardListeners = new Dictionary<Keys, Action>();
-            pressedKeyboardListeners = new Dictionary<Keys, Action>();
+            keyboardListeners = new Dictionary<Keys, Dictionary<Action, bool>>();
             gamepadListeners = new Dictionary<Buttons, Action>();
         }
 
