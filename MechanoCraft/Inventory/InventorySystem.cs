@@ -8,28 +8,28 @@ namespace MechanoCraft.Inventory
     public class InventorySystem
     {
         private static InventorySystem instance;
-        private Dictionary<IItem, Entity> worldResources;
+        private Dictionary<Item, Entity> worldResources;
         private InventorySystem()
         {
-            worldResources = new Dictionary<IItem, Entity>();
+            worldResources = new Dictionary<Item, Entity>();
         }
 
-        public void RegisterItem(IItem item, Entity owner)
+        public void RegisterItem(Item item, Entity owner)
         {
             worldResources.Add(item, owner);
         }
 
-        public void TransferItem(IItem item, Entity newOwner)
+        public void TransferItem(Item item, Entity newOwner)
         {
             worldResources[item] = newOwner;
         }
 
-        public void RemoveItem(IItem item)
+        public void RemoveItem(Item item)
         {
             worldResources.Remove(item);
         }
 
-        public List<IItem> GetItems(Entity owner) 
+        public List<Item> GetItems(Entity owner) 
         {
             return worldResources.Keys.Where(item => worldResources[item] == owner).ToList();
         }

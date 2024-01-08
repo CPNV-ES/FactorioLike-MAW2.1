@@ -6,8 +6,19 @@ using System.Threading.Tasks;
 
 namespace MechanoCraft.Inventory.Items
 {
-    public interface IItem
+    public class Item
     {
-        string GetLocalizedName();
+        public enum ItemType
+        {
+            Ore
+        }
+        public enum MaterialType
+        {
+            Copper,
+            Iron
+        }
+
+        int id;
+        string name;
     }
 }
