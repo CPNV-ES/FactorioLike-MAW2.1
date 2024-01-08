@@ -13,6 +13,14 @@ Recettes : combinaisons D'items, qui permet de créer d'autre items.
 Craft : Action de transformer un item en un autre.
 ## Conventions de nommage
 
+### Commits
+
+Type de commit (feat, fix, enhancement): Nom du commit
+
+### Branches
+
+Type de branches (feature, fix, enhancement, doc)/Nom-de-la-branche
+
 ### Assets graphique / Sprites
 
 dans ce projet, chaques sprites, qui peut être chargé dans le jeux sont nommé de cette manière :
