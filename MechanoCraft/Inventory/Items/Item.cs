@@ -12,6 +12,8 @@ namespace MechanoCraft.Inventory.Items
         {
             None,
             Ore,
+            Bar,
+            Plate,
             Crafter,
             Miner,
             Polisher,
