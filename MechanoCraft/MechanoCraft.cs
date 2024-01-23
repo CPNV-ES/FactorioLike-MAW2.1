@@ -40,7 +40,9 @@ namespace MechanoCraft
             Components.Add(_world);
             InputHandler.GetInstance().AddInputListener(Keys.Space, () =>
             {
-                ObjectPlacerSystem.Place(EntityLoadSystem.LoadSpriteAsEntity("Crafter", _world, Content), new Vector2(Mouse.GetState().X, Mouse.GetState().Y), gridSize);
+                var mouseState = Mouse.GetState();
+                var _worldPosition = _camera.ScreenToWorld(new Vector2(mouseState.X, mouseState.Y));
+                ObjectPlacerSystem.Place(EntityLoadSystem.LoadSpriteAsEntity("Crafter", _world, Content), new Vector2(_worldPosition.X, _worldPosition.Y), gridSize);
             });
             InputHandler.GetInstance().AddInputListener(Keys.Escape, () =>
             {
