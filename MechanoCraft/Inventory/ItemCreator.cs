@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using MechanoCraft.Inventory.Items;
 namespace MechanoCraft.Inventory
 {
-    public  class ItemCreator
+    public class ItemCreator
     {
         public static  List<Item> possibleItems;
 

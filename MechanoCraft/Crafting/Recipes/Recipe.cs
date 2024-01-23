@@ -14,8 +14,8 @@ namespace MechanoCraft.Crafting.Recipes
 
         public Recipe(List<Item> inputs, List<Item> outputs)
         {
-            this.inputs = inputs;
-            this.outputs = outputs;
+            this.inputs.AddRange(inputs);
+            this.outputs.AddRange(outputs);
         }
     }
 }

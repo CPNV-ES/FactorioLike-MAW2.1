@@ -7,6 +7,10 @@ using MonoGame.Extended;
 using MechanoCraft.Input;
 using MechanoCraft.Render;
 using MonoGame.Extended.Sprites;
+using MechanoCraft.Crafting;
+using MechanoCraft.Crafting.Recipes;
+using MechanoCraft.Inventory;
+using MechanoCraft.Inventory.Items;
 
 namespace MechanoCraft
 {
@@ -29,6 +33,16 @@ namespace MechanoCraft
             // TODO: Add your initialization logic here
             _world = new WorldBuilder().AddSystem(new SpriteRenderSystem(GraphicsDevice)).Build();
             Components.Add(_world);
+
+            ItemCreator.CreateItems();
+            Recipes.CreateRecipes();
+
+            List<Item> items = new List<Item>
+            {
+                ItemCreator.possibleItems[1],
+            };
+
+            List<Item> output = CraftingSystem.Craft(Recipes.possibleRecipes[0], items);
 
             InputHandler.GetInstance().AddInputListener(Keys.Escape, () =>
             {

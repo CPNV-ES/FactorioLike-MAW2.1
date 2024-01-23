@@ -10,7 +10,7 @@ namespace MechanoCraft.Crafting
 {
     public class CraftingSystem
     {
-        public List<Item> Craft(Recipe recipe, List<Item> inputs)
+        public static List<Item> Craft(Recipe recipe, List<Item> inputs)
         {
             if (recipe == null)
             {
