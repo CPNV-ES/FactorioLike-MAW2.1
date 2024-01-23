@@ -1,12 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using MonoGame.Extended.Entities;
-using MonoGame.Extended;
 using MechanoCraft.Input;
+using MechanoCraft.Loader;
 using MechanoCraft.Render;
-using MonoGame.Extended.Sprites;
+using MechanoCraft.Placement;
 using MechanoCraft.Entity.Player;
+using MonoGame.Extended;
+using MonoGame.Extended.Entities;
 using MonoGame.Extended.ViewportAdapters;
 
 namespace MechanoCraft
@@ -17,7 +18,7 @@ namespace MechanoCraft
         private OrthographicCamera _camera;
         private SpriteBatch _spriteBatch;
         private World _world;
-
+        private Vector2 gridSize = new Vector2(144, 144);
         public MechanoCraft()
         {
             _graphics = new GraphicsDeviceManager(this);     
@@ -37,7 +38,10 @@ namespace MechanoCraft
                 .AddSystem(new PlayerUpdateSystem(_camera))
                 .Build();
             Components.Add(_world);
-
+            InputHandler.GetInstance().AddInputListener(Keys.Space, () =>
+            {
+                ObjectPlacerSystem.Place(EntityLoadSystem.LoadSpriteAsEntity("Crafter", _world, Content), new Vector2(Mouse.GetState().X, Mouse.GetState().Y), gridSize);
+            });
             InputHandler.GetInstance().AddInputListener(Keys.Escape, () =>
             {
                 Exit();

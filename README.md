@@ -6,16 +6,37 @@ Factorio like est un jeu 2D, primitif fait sur monogame à la façon factorio, o
 
 C#
 
-## termes techniques
+## Termes techniques
 
 Items : élement qui peux être transmis entre machines (example, un minerai)
 Recettes : combinaisons D'items, qui permet de créer d'autre items.
+Craft : Action de transformer un item en un autre.
+## Conventions de nommage
 
-## technologie
+### Commits
 
-MonoGame(3.8.1)
-MonoGameExtended
-Dotnet(7.0)
+Type de commit (feat, fix, enhancement): Nom du commit
+
+### Branches
+
+Type de branches (feature, fix, enhancement, doc)/Nom-de-la-branche
+
+### Assets graphique / Sprites
+
+dans ce projet, chaques sprites, qui peut être chargé dans le jeux sont nommé de cette manière :
+
+Pour les machines de Craft : NomDeLaMachine+Type.png, le type represent quelle partie du sprite c'est, par example, les ombres, les highlights, etc, il sont dans des images differentes, mais represente le même object
+
+Pour les minerais : TypeDeMetal+Ore.png, le type de métal, peux être par example, du fer, du cuivre, etc... "Ore", est fixe, il represent le type de métal c'est, example, on peut avoir IronBar.png, IronPlate.png, c'est bien de pouvoir faire la différence
+
+
+
+## Technologie
+
+- MonoGame(3.8.1)
+- MonoGameExtended
+- Dotnet(7.0)
+- PlantUml
 
 ### Fonctionnalitées
 
@@ -33,7 +54,7 @@ Dotnet(7.0)
 - Ennemis qui charge (Roaming)
 - Inventaire du joueur
 
-### environment de travail
+### Environment de travail
 
 Visual studio community 2022
 
