@@ -10,7 +10,7 @@ namespace MechanoCraft.Crafting.Recipes
 {
     public class Recipes
     {
-        static Dictionary<List<Item>, List<Item>> possibleRecipes;
+        public static List<Recipe> possibleRecipes;
 
         public static void CreateRecipes()
         {
@@ -18,18 +18,22 @@ namespace MechanoCraft.Crafting.Recipes
             List<Item> outputs = new List<Item>();
 
 
-            possibleRecipes = new Dictionary<List<Item>, List<Item>> ();
+            possibleRecipes = new List<Recipe>();
 
             inputs.Add(ItemCreator.possibleItems[1]);
             outputs.Add(ItemCreator.possibleItems[2]);
-            possibleRecipes.Add(inputs, outputs);
+            Recipe recipe = new Recipe(inputs, outputs);
+
+            possibleRecipes.Add(recipe);
 
             inputs.Clear();
             outputs.Clear();
 
             inputs.Add(ItemCreator.possibleItems[2]);
             outputs.Add(ItemCreator.possibleItems[3]);
-            possibleRecipes.Add(inputs, outputs);
+            recipe = new Recipe(inputs, outputs);
+
+            possibleRecipes.Add(recipe);
 
             inputs.Clear();
             outputs.Clear();
