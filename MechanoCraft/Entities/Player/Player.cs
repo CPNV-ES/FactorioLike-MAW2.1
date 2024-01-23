@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MechanoCraft.Entity.Player
+namespace MechanoCraft.Entities.Player
 {
     public class Player
     {

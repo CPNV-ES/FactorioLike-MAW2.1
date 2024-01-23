@@ -5,7 +5,7 @@ using MonoGame.Extended.Entities;
 using MonoGame.Extended.Entities.Systems;
 using MonoGame.Extended.Sprites;
 
-namespace MechanoCraft.Entity.Player
+namespace MechanoCraft.Entities.Player
 {
     public class PlayerUpdateSystem : EntityUpdateSystem
     {

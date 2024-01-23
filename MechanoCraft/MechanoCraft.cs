@@ -5,7 +5,7 @@ using MechanoCraft.Input;
 using MechanoCraft.Loader;
 using MechanoCraft.Render;
 using MechanoCraft.Placement;
-using MechanoCraft.Entity.Player;
+using MechanoCraft.Entities.Player;
 using MonoGame.Extended;
 using MonoGame.Extended.Entities;
 using MonoGame.Extended.ViewportAdapters;
