@@ -1,6 +1,8 @@
-﻿using MechanoCraft.Input;
+﻿
+using MechanoCraft.Input;
 using Microsoft.Xna.Framework;
 using MonoGame.Extended;
+
 using MonoGame.Extended.Entities;
 using MonoGame.Extended.Entities.Systems;
 using MonoGame.Extended.Sprites;
@@ -17,6 +19,8 @@ namespace MechanoCraft.Entities.Player
         private static readonly Vector2 UNIT_X_VECTOR = new Vector2(1f, 0f);
         private static readonly Vector2 UNIT_Y_VECTOR  = new Vector2(0f, 1f);
         private static readonly float PLAYER_BASE_SPEED = 20f;
+
+
         public PlayerUpdateSystem(OrthographicCamera orthographicCamera) : base(Aspect.All(typeof(Transform2), typeof(Sprite), typeof(Player)))
         {
             _orthographicCamera = orthographicCamera;
@@ -65,8 +69,8 @@ namespace MechanoCraft.Entities.Player
 
         public override void Update(GameTime gameTime)
         {
-
-            //throw new NotImplementedException();
+          
         }
+
     }
 }

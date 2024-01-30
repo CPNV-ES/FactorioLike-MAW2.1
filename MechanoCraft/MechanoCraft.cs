@@ -9,6 +9,7 @@ using MechanoCraft.Entities.Player;
 using MonoGame.Extended;
 using MonoGame.Extended.Entities;
 using MonoGame.Extended.ViewportAdapters;
+using MechanoCraft.Entities.Machines;
 
 namespace MechanoCraft
 {
@@ -19,6 +20,8 @@ namespace MechanoCraft
         private SpriteBatch _spriteBatch;
         private World _world;
         private Vector2 gridSize = new Vector2(144, 144);
+        private Entity currentEntity;
+        private Vector2 _worldPos;
         public MechanoCraft()
         {
             _graphics = new GraphicsDeviceManager(this);     
@@ -29,20 +32,24 @@ namespace MechanoCraft
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            ObjectPlacerSystem placerSystem = (ObjectPlacerSystem)ObjectPlacerSystem.GetInstance();
             BoxingViewportAdapter viewportAdapter = new BoxingViewportAdapter(Window, _graphics.GraphicsDevice, _graphics.GraphicsDevice.ScissorRectangle.Width, _graphics.GraphicsDevice.ScissorRectangle.Height);
             _camera = new OrthographicCamera(viewportAdapter);
 
             _world = new WorldBuilder()
                 .AddSystem(new SpriteRenderSystem(GraphicsDevice, _camera))
                 .AddSystem(new PlayerUpdateSystem(_camera))
+                .AddSystem(placerSystem)
                 .Build();
             Components.Add(_world);
+            currentEntity = EntityLoadSystem.LoadSpriteAsEntity("Crafter", _world, Content);
+            
             InputHandler.GetInstance().AddInputListener(Keys.Space, () =>
-            {
-                var mouseState = Mouse.GetState();
-                var _worldPosition = _camera.ScreenToWorld(new Vector2(mouseState.X, mouseState.Y));
-                ObjectPlacerSystem.Place(EntityLoadSystem.LoadSpriteAsEntity("Crafter", _world, Content), new Vector2(_worldPosition.X, _worldPosition.Y), gridSize);
+            {   if (placerSystem.CanPlaceObject(currentEntity))
+                {
+                    currentEntity.Get<Machine>().IsPlaced = true;
+                    currentEntity = EntityLoadSystem.LoadSpriteAsEntity("Crafter", _world, Content);
+                }
             });
             InputHandler.GetInstance().AddInputListener(Keys.Escape, () =>
             {
@@ -60,6 +67,8 @@ namespace MechanoCraft
 
         protected override void Update(GameTime gameTime)
         {
+            var mouseState = Mouse.GetState();
+            _worldPos = _camera.ScreenToWorld(new Vector2(mouseState.X, mouseState.Y));
             // TODO: Add your update logic here
             _world.Update(gameTime);
             InputHandler.GetInstance().ProcessListeners();
@@ -68,6 +77,11 @@ namespace MechanoCraft
 
         protected override void Draw(GameTime gameTime)
         {
+            if (currentEntity != null)
+            {
+                ObjectPlacerSystem.Place(currentEntity, new Vector2(_worldPos.X, _worldPos.Y), gridSize);
+            }
+
             _world.Draw(gameTime);
             base.Draw(gameTime);
         }
