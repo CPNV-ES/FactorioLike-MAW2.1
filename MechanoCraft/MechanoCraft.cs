@@ -35,7 +35,7 @@ namespace MechanoCraft
             Recipes.CreateRecipes();
 
             _world = new WorldBuilder()
-                .AddSystem(new TerrainGenerationSystem(GraphicsDevice, Content.Load<TiledMap>("Terrain/BasicTileMap")))
+                .AddSystem(new TerrainGenerationSystem(GraphicsDevice, Content.Load<TiledMap>("Terrain/BasicTileMap"), _camera))
                 .AddSystem(new SpriteRenderSystem(GraphicsDevice, _camera))
                 .AddSystem(new PlayerUpdateSystem(_camera))
                 .Build();

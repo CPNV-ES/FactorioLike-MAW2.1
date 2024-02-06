@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
 using MonoGame.Extended.Entities;
 using MonoGame.Extended.Entities.Systems;
 using MonoGame.Extended.Tiled;
@@ -11,11 +12,13 @@ namespace MechanoCraft.Systems
     {
         TiledMap tiledMap;
         TiledMapRenderer tiledMapRenderer;
+        OrthographicCamera camera;
 
-        public TerrainGenerationSystem(GraphicsDevice graphics, TiledMap tiledMap)
+        public TerrainGenerationSystem(GraphicsDevice graphics, TiledMap tiledMap, OrthographicCamera camera)
         {
             this.tiledMap = tiledMap;
             tiledMapRenderer = new TiledMapRenderer(graphics, tiledMap);
+            this.camera = camera;
         }
 
         public void Dispose()
@@ -25,7 +28,7 @@ namespace MechanoCraft.Systems
 
         public void Draw(GameTime gameTime)
         {
-            tiledMapRenderer.Draw();
+            tiledMapRenderer.Draw(camera.GetViewMatrix());
         }
 
         public void Initialize(World world)
