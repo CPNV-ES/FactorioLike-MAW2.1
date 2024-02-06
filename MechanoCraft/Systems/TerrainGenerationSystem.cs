@@ -14,10 +14,10 @@ namespace MechanoCraft.Systems
         TiledMapRenderer tiledMapRenderer;
         OrthographicCamera camera;
 
-        public TerrainGenerationSystem(GraphicsDevice graphics, TiledMap tiledMap, OrthographicCamera camera) 
+        public TerrainGenerationSystem(GraphicsDevice graphics, TiledMap tiledMap, OrthographicCamera camera)
         {
             this.tiledMap = tiledMap;
-            tiledMapRenderer = new TiledMapRenderer(graphics,tiledMap);
+            tiledMapRenderer = new TiledMapRenderer(graphics, tiledMap);
             this.camera = camera;
         }
 
