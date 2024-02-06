@@ -12,8 +12,10 @@ namespace MechanoCraft.Input
     public class InputHandler
     {
         private static InputHandler instance;
-        private Dictionary<Keys, Action> keyboardListeners;
+        private Dictionary<Keys, Dictionary<Action, bool>> keyboardListeners;
         private Dictionary<Buttons, Action> gamepadListeners;
+        private KeyboardState currentKeyboardState;
+        private KeyboardState oldKeyboardState;
         private Action leftMouseButtonListener;
         private Action rightMouseButtonListener;
         private Action middleMouseButtonListener;
@@ -21,7 +23,7 @@ namespace MechanoCraft.Input
         private Action x2MouseButtonListener;
         private InputHandler()
         {
-            keyboardListeners = new Dictionary<Keys, Action>();
+            keyboardListeners = new Dictionary<Keys, Dictionary<Action, bool>>();
             gamepadListeners = new Dictionary<Buttons, Action>();
         }
 
@@ -30,6 +32,14 @@ namespace MechanoCraft.Input
             if(keyboardListeners != null && !keyboardListeners.ContainsKey(key))
             {
                 keyboardListeners.Add(key, listener);
+            }
+        }
+
+        public void AddPressedInputListener(Keys key, Action listener)
+        {
+            if (pressedKeyboardListeners != null && !pressedKeyboardListeners.ContainsKey(key))
+            {
+                pressedKeyboardListeners.Add(key, listener);
             }
         }
 
@@ -88,6 +98,13 @@ namespace MechanoCraft.Input
                 keyboardListeners.Remove(key);
             }
         }
+        public void RemovePressedInputListener(Keys key)
+        {
+            if (pressedKeyboardListeners != null && pressedKeyboardListeners.ContainsKey(key))
+            {
+                pressedKeyboardListeners.Remove(key);
+            }
+        }
 
         public void RemoveInputListener(Buttons button)
         {
@@ -132,6 +149,19 @@ namespace MechanoCraft.Input
                 x1MouseButtonListener();
             if (mouseState.XButton2 == ButtonState.Pressed && x2MouseButtonListener != null)
                 x2MouseButtonListener();
+        }
+        public void ProcessPressedListeners()
+        {
+            oldKeyboardState = currentKeyboardState;
+            currentKeyboardState = Keyboard.GetState();
+
+            foreach (KeyValuePair<Keys, Action> listener in pressedKeyboardListeners)
+            {
+                if (currentKeyboardState.IsKeyDown(listener.Key) && !oldKeyboardState.IsKeyDown(listener.Key))
+                {
+                    listener.Value();
+                }
+            }
         }
 
         public static InputHandler GetInstance()

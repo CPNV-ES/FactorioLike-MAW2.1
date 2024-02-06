@@ -77,6 +77,7 @@ namespace MechanoCraft
             // TODO: Add your update logic here
             _world.Update(gameTime);
             InputHandler.GetInstance().ProcessListeners();
+            InputHandler.GetInstance().ProcessPressedListeners();
             base.Update(gameTime);
         }
 
