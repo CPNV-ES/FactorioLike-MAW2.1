@@ -1,10 +1,14 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MechanoCraft.Input;
 using MechanoCraft.Loader;
 using MechanoCraft.Render;
 using MonoGame.Extended.Sprites;
+using MechanoCraft.Crafting;
+using MechanoCraft.Crafting.Recipes;
+using MechanoCraft.Inventory;
+using MechanoCraft.Inventory.Items;
 using MechanoCraft.Generator;
 using MonoGame.Extended.Tiled;
 using MechanoCraft.Placement;
@@ -13,7 +17,6 @@ using MonoGame.Extended;
 using MonoGame.Extended.Entities;
 using MonoGame.Extended.ViewportAdapters;
 using MechanoCraft.Entities.Machines;
-
 
 namespace MechanoCraft
 {
@@ -40,6 +43,15 @@ namespace MechanoCraft
             BoxingViewportAdapter viewportAdapter = new BoxingViewportAdapter(Window, _graphics.GraphicsDevice, _graphics.GraphicsDevice.ScissorRectangle.Width, _graphics.GraphicsDevice.ScissorRectangle.Height);
             _camera = new OrthographicCamera(viewportAdapter);
 
+            ItemCreator.CreateItems();
+            Recipes.CreateRecipes();
+
+            List<Item> items = new List<Item>
+            {
+                ItemCreator.possibleItems[1],
+            };
+
+            List<Item> output = CraftingSystem.Craft(Recipes.possibleRecipes[0], items);
             _world = new WorldBuilder()
                 .AddSystem(new SpriteRenderSystem(GraphicsDevice, _camera))
                 .AddSystem(new PlayerUpdateSystem(_camera))
