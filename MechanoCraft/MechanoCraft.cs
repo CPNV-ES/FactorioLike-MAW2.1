@@ -1,3 +1,4 @@
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -17,6 +18,7 @@ using MonoGame.Extended;
 using MonoGame.Extended.Entities;
 using MonoGame.Extended.ViewportAdapters;
 using MechanoCraft.Entities.Machines;
+using System.Collections.Generic;
 
 namespace MechanoCraft
 {
@@ -89,7 +91,6 @@ namespace MechanoCraft
             // TODO: Add your update logic here
             _world.Update(gameTime);
             InputHandler.GetInstance().ProcessListeners();
-            InputHandler.GetInstance().ProcessPressedListeners();
             base.Update(gameTime);
         }
 
