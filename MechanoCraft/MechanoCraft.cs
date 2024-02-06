@@ -12,7 +12,6 @@ using MechanoCraft.Loader;
 using System.Collections.Generic;
 using System;
 using System.Reflection.PortableExecutable;
-using MechanoCraft.Structs;
 
 namespace MechanoCraft
 {
@@ -36,7 +35,6 @@ namespace MechanoCraft
             InputHandler.GetInstance().AddInputListener(Keys.Space, () =>
             {
                 Entity entity = EntityLoadSystem.LoadSpriteAsEntity("Crafter", _world, Content);
-                entity.Attach(new Structs.Machine());
                 ObjectPlacerSystem.Place(entity, new Vector2(Mouse.GetState().X, Mouse.GetState().Y), gridSize);
             });
             InputHandler.GetInstance().AddInputListener(Keys.Escape, () =>

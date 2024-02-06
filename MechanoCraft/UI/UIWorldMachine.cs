@@ -16,7 +16,6 @@ using MonoGame.Extended;
 using Microsoft.Xna.Framework.Input;
 using System.Drawing;
 using MechanoCraft.Input;
-using MechanoCraft.Structs;
 
 namespace MechanoCraft.UI
 {
