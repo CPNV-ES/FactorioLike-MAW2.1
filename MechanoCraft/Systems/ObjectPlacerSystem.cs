@@ -5,7 +5,7 @@ using MonoGame.Extended.Entities.Systems;
 using MonoGame.Extended.Sprites;
 using MechanoCraft.Entities.Machines;
 
-namespace MechanoCraft.Placement
+namespace MechanoCraft.Systems
 {
     public class ObjectPlacerSystem : EntitySystem
     {
@@ -14,7 +14,7 @@ namespace MechanoCraft.Placement
         private ComponentMapper<Transform2> _transformMapper;
         private static ObjectPlacerSystem instance;
 
-        public  ObjectPlacerSystem(AspectBuilder aspectBuilder) : base(aspectBuilder)
+        public ObjectPlacerSystem(AspectBuilder aspectBuilder) : base(aspectBuilder)
         {
         }
 
@@ -48,18 +48,18 @@ namespace MechanoCraft.Placement
             return rec2.Intersects(rec);
         }
 
-        public static void Place(Entity entity, Vector2 position, Vector2 gridSize) 
+        public static void Place(Entity entity, Vector2 position, Vector2 gridSize)
         {
             instance.CanPlaceObject(entity);
             int TileX = (int)(position.X / gridSize.X);
             int TileY = (int)(position.Y / gridSize.Y);
-            entity.Get<Transform2>().Position = new Vector2(TileX* gridSize.X,TileY * gridSize.Y);
+            entity.Get<Transform2>().Position = new Vector2(TileX * gridSize.X, TileY * gridSize.Y);
         }
 
         public override void Initialize(IComponentMapperService mapperService)
         {
             _spriteMapper = mapperService.GetMapper<Sprite>();
-            _machineMapper  = mapperService.GetMapper<Machine>();
+            _machineMapper = mapperService.GetMapper<Machine>();
             _transformMapper = mapperService.GetMapper<Transform2>();
         }
         public static ISystem GetInstance()
