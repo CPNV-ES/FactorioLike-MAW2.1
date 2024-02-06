@@ -4,11 +4,15 @@ using Microsoft.Xna.Framework.Input;
 using MechanoCraft.Input;
 using MechanoCraft.Loader;
 using MechanoCraft.Render;
+using MonoGame.Extended.Sprites;
+using MechanoCraft.Generator;
+using MonoGame.Extended.Tiled;
 using MechanoCraft.Placement;
 using MechanoCraft.Entities.Player;
 using MonoGame.Extended;
 using MonoGame.Extended.Entities;
 using MonoGame.Extended.ViewportAdapters;
+
 
 namespace MechanoCraft
 {
@@ -36,6 +40,7 @@ namespace MechanoCraft
             _world = new WorldBuilder()
                 .AddSystem(new SpriteRenderSystem(GraphicsDevice, _camera))
                 .AddSystem(new PlayerUpdateSystem(_camera))
+                .AddSystem(new TerrainGenerator(GraphicsDevice, Content.Load<TiledMap>("Terrain/BasicTileMap")))
                 .Build();
             Components.Add(_world);
             InputHandler.GetInstance().AddInputListener(Keys.Space, () =>
