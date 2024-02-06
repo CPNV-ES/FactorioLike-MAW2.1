@@ -55,10 +55,10 @@ namespace MechanoCraft
 
             List<Item> output = CraftingSystem.Craft(Recipes.possibleRecipes[0], items);
             _world = new WorldBuilder()
+                .AddSystem(new TerrainGenerator(GraphicsDevice, Content.Load<TiledMap>("Terrain/BasicTileMap")))
                 .AddSystem(new SpriteRenderSystem(GraphicsDevice, _camera))
                 .AddSystem(new PlayerUpdateSystem(_camera))
                 .AddSystem(placerSystem)
-                .AddSystem(new TerrainGenerator(GraphicsDevice, Content.Load<TiledMap>("Terrain/BasicTileMap")))
                 .Build();
             Components.Add(_world);
             currentEntity = EntityLoadSystem.LoadSpriteAsEntity("Crafter", _world, Content);

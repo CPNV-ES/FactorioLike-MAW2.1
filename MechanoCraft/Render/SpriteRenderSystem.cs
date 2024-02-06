@@ -32,7 +32,6 @@ namespace MechanoCraft.Render
 
         public override void Draw(GameTime gameTime)
         {
-            _graphicsDevice.Clear(Color.Wheat);
             _spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: _orthographicCamera.GetViewMatrix());
 
             foreach (var entity in ActiveEntities)
