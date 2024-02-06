@@ -55,7 +55,7 @@ namespace MechanoCraft
 
             List<Item> output = CraftingSystem.Craft(Recipes.possibleRecipes[0], items);
             _world = new WorldBuilder()
-                .AddSystem(new TerrainGenerator(GraphicsDevice, Content.Load<TiledMap>("Terrain/BasicTileMap")))
+                .AddSystem(new TerrainGenerator(GraphicsDevice, Content.Load<TiledMap>("Terrain/BasicTileMap"), _camera))
                 .AddSystem(new SpriteRenderSystem(GraphicsDevice, _camera))
                 .AddSystem(new PlayerUpdateSystem(_camera))
                 .AddSystem(placerSystem)
@@ -100,7 +100,7 @@ namespace MechanoCraft
             {
                 ObjectPlacerSystem.Place(currentEntity, new Vector2(_worldPos.X, _worldPos.Y), gridSize);
             }
-
+            GraphicsDevice.Clear(Color.DarkGray);
             _world.Draw(gameTime);
             base.Draw(gameTime);
         }
