@@ -59,6 +59,7 @@ namespace MechanoCraft
 
         protected override void Draw(GameTime gameTime)
         {
+            GraphicsDevice.Clear(Color.DarkGray);
             // TODO: Add you draw logic here
             _world.Draw(gameTime);
             base.Draw(gameTime);
