@@ -5,7 +5,7 @@ using MonoGame.Extended.Entities;
 using MonoGame.Extended.Entities.Systems;
 using MonoGame.Extended.Sprites;
 
-namespace MechanoCraft.Render
+namespace MechanoCraft.Systems
 {
     public class SpriteRenderSystem : EntityDrawSystem
     {
