@@ -1,6 +1,5 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MechanoCraft.Render;
 using MechanoCraft.Crafting.Recipes;
 using MechanoCraft.Inventory;
 using MonoGame.Extended.Tiled;
