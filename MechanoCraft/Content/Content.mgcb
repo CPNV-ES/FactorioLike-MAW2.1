@@ -10,10 +10,11 @@
 
 #-------------------------------- References --------------------------------#
 
+/reference:..\..\..\..\..\.nuget\packages\monogame.extended.content.pipeline\3.9.0-alpha0093\tools\MonoGame.Extended.Content.Pipeline.dll
 
 #---------------------------------- Content ---------------------------------#
 
-#begin crafter.png
+#begin Crafter.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -23,7 +24,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:crafter.png
+/build:Crafter.png
 
 #begin CrafterShadow.png
 /importer:TextureImporter
@@ -120,4 +121,14 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:SmelterShadow.png
+
+#begin Terrain/BasicTileMap.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:Terrain/BasicTileMap.tmx
+
+#begin Terrain/BasicTileSet.tsx
+/importer:TiledMapTilesetImporter
+/processor:TiledMapTilesetProcessor
+/build:Terrain/BasicTileSet.tsx
 

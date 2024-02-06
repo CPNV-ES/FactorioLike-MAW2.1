@@ -10,15 +10,17 @@ namespace MechanoCraft.Render
     public class SpriteRenderSystem : EntityDrawSystem
     {
         private readonly GraphicsDevice _graphicsDevice;
+        private readonly OrthographicCamera _orthographicCamera;
         private readonly SpriteBatch _spriteBatch;
 
         private ComponentMapper<Transform2> _transformMapper;
         private ComponentMapper<Sprite> _spriteMapper;
 
-        public SpriteRenderSystem(GraphicsDevice graphicsDevice)
+        public SpriteRenderSystem(GraphicsDevice graphicsDevice, OrthographicCamera camera)
             : base(Aspect.All(typeof(Transform2), typeof(Sprite)))
         {
             _graphicsDevice = graphicsDevice;
+            _orthographicCamera = camera;
             _spriteBatch = new SpriteBatch(graphicsDevice);
         }
 
@@ -31,14 +33,14 @@ namespace MechanoCraft.Render
         public override void Draw(GameTime gameTime)
         {
             _graphicsDevice.Clear(Color.Wheat);
-            _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
+            _spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: _orthographicCamera.GetViewMatrix());
 
             foreach (var entity in ActiveEntities)
             {
                 var transform = _transformMapper.Get(entity);
                 var sprite = _spriteMapper.Get(entity);
 
-                _spriteBatch.Draw(sprite, transform);
+                _spriteBatch.Draw(sprite, transform.WorldPosition);
             }
             _spriteBatch.End();
         }
