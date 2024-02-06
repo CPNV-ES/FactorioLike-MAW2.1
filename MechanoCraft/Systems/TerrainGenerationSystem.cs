@@ -6,15 +6,15 @@ using MonoGame.Extended.Entities.Systems;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
 
-namespace MechanoCraft.Generator
+namespace MechanoCraft.Systems
 {
-    internal class TerrainGenerator : IUpdateSystem, IDrawSystem
+    internal class TerrainGenerationSystem : IUpdateSystem, IDrawSystem
     {
         TiledMap tiledMap;
         TiledMapRenderer tiledMapRenderer;
         OrthographicCamera camera;
 
-        public TerrainGenerator(GraphicsDevice graphics, TiledMap tiledMap, OrthographicCamera camera) 
+        public TerrainGenerationSystem(GraphicsDevice graphics, TiledMap tiledMap, OrthographicCamera camera) 
         {
             this.tiledMap = tiledMap;
             tiledMapRenderer = new TiledMapRenderer(graphics,tiledMap);
