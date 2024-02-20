@@ -16,6 +16,8 @@ using MonoGame.Extended;
 using Microsoft.Xna.Framework.Input;
 using System.Drawing;
 using MechanoCraft.Input;
+using MechanoCraft.Inventory.Items;
+using MechanoCraft.Entities.Machines;
 
 namespace MechanoCraft.UI
 {
@@ -27,14 +29,16 @@ namespace MechanoCraft.UI
 
         private ComponentMapper<Transform2> _transformMapper;
         private ComponentMapper<Sprite> _spriteMapper;
+        private ComponentMapper<Machine> _machineMapper;
         private bool hovering;
         private bool createdUI;
         private UIMachineInventory uIMachineInventory;
 
         private MouseState currentMouseState;
         private MouseState oldMouseState;
+        private Item currentItem;
         public UIWorldMachine(GraphicsDevice graphicsDevice)
-            : base(Aspect.All(typeof(Transform2), typeof(Sprite)))
+            : base(Aspect.All(typeof(Transform2), typeof(Sprite), typeof(Machine)))
         {
             _graphicsDevice = graphicsDevice;
             _spriteBatch = new SpriteBatch(graphicsDevice);
@@ -44,13 +48,14 @@ namespace MechanoCraft.UI
         {
             _transformMapper = mapperService.GetMapper<Transform2>();
             _spriteMapper = mapperService.GetMapper<Sprite>();
+            _machineMapper = mapperService.GetMapper<Machine>();
             uIMachineInventory = new UIMachineInventory();
             InputHandler.GetInstance().RegisterLeftMouseButtonListener(() =>
             {
 
                 if (hovering && !createdUI && currentMouseState.LeftButton == ButtonState.Pressed && !(oldMouseState.LeftButton == ButtonState.Pressed))
                 {
-                    uIMachineInventory.BasePanel();
+                    uIMachineInventory.BasePanel(currentItem.name);
                     uIMachineInventory.OneInputOutputUI();
                     createdUI = true;
                 }
@@ -66,6 +71,7 @@ namespace MechanoCraft.UI
             currentMouseState = Mouse.GetState();
             foreach (var entity in ActiveEntities)
             {
+                currentItem = _machineMapper.Get(entity).Item;
                 var sprite = _spriteMapper.Get(entity);
 
                 if (sprite.TextureRegion.Bounds.Contains(mousePoint))

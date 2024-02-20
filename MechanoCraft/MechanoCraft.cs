@@ -67,6 +67,7 @@ namespace MechanoCraft
             {   if (placerSystem.CanPlaceObject(currentEntity))
                 {
                     currentEntity.Get<Machine>().IsPlaced = true;
+                    currentEntity.Get<Machine>().Item = ItemCreator.possibleItems[4];
                     currentEntity = EntityLoadSystem.LoadSpriteAsEntity("Crafter", _world, Content);
                 }
             });

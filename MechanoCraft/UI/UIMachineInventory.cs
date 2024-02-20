@@ -23,14 +23,14 @@ namespace MechanoCraft.UI
         private Panel leftPanel;
         private Panel centerPanel;
         private Panel rightPanel;
-        public void BasePanel()
+        public void BasePanel(string itemName)
         {
             panel = new Panel(new Vector2(400, 220), PanelSkin.Default, Anchor.Center);
             Panel entitiesGroup = new Panel(new Vector2(0, 250), PanelSkin.None, Anchor.Auto);
 
             UserInterface.Active.AddEntity(panel);
 
-            panel.AddChild(new Header("MachineName"));
+            panel.AddChild(new Header(itemName));
             panel.AddChild(new HorizontalLine());
             entitiesGroup.Padding = Vector2.Zero;
             panel.AddChild(entitiesGroup);
