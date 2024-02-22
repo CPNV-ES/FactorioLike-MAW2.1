@@ -37,7 +37,7 @@ namespace MechanoCraft
             _world = new WorldBuilder()
                 .AddSystem(new TerrainGenerationSystem(GraphicsDevice, Content.Load<TiledMap>("Terrain/BasicTileMap"), _camera))
                 .AddSystem(new SpriteRenderSystem(GraphicsDevice, _camera))
-                .AddSystem(new ObjectPlacerSystem(_camera, Content))
+                .AddSystem(new ObjectPlacerSystem(_camera, new Vector2(162, 162), Content))
                 .AddSystem(new PlayerUpdateSystem(_camera))
                 .Build();
             Components.Add(_world);
