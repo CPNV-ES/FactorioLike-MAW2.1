@@ -1,5 +1,4 @@
 ﻿using MechanoCraft.Entities.Player;
-using MechanoCraft.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
