@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using GeonBit.UI;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using MonoGame.Extended.Entities;
@@ -19,13 +20,14 @@ namespace MechanoCraft.Render
         public SpriteRenderSystem(GraphicsDevice graphicsDevice, OrthographicCamera camera)
             : base(Aspect.All(typeof(Transform2), typeof(Sprite)))
         {
+            _spriteBatch = new SpriteBatch(graphicsDevice);
             _graphicsDevice = graphicsDevice;
             _orthographicCamera = camera;
-            _spriteBatch = new SpriteBatch(graphicsDevice);
         }
 
         public override void Initialize(IComponentMapperService mapperService)
         {
+            
             _transformMapper = mapperService.GetMapper<Transform2>();
             _spriteMapper = mapperService.GetMapper<Sprite>();
         }
@@ -33,7 +35,7 @@ namespace MechanoCraft.Render
         public override void Draw(GameTime gameTime)
         {
             _spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: _orthographicCamera.GetViewMatrix());
-
+            
             foreach (var entity in ActiveEntities)
             {
                 var transform = _transformMapper.Get(entity);
@@ -42,6 +44,7 @@ namespace MechanoCraft.Render
                 _spriteBatch.Draw(sprite, transform.WorldPosition);
             }
             _spriteBatch.End();
+
         }
     }
 }

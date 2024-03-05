@@ -15,6 +15,8 @@ namespace MechanoCraft.Input
         private Action middleMouseButtonListener;
         private Action x1MouseButtonListener;
         private Action x2MouseButtonListener;
+        private MouseState oldMouseState;
+        private MouseState currentMouseState;
         private InputHandler()
         {
             keyboardListeners = new Dictionary<Keys, Action>();
@@ -117,8 +119,9 @@ namespace MechanoCraft.Input
                     listener.Value();
                 }
             }
-
-            if (mouseState.LeftButton == ButtonState.Pressed && leftMouseButtonListener != null)
+            oldMouseState = currentMouseState;
+            currentMouseState = Mouse.GetState();
+            if (oldMouseState.LeftButton == ButtonState.Released && currentMouseState.LeftButton == ButtonState.Pressed && leftMouseButtonListener != null)
                 leftMouseButtonListener();
             if (mouseState.RightButton == ButtonState.Pressed && rightMouseButtonListener != null)
                 rightMouseButtonListener();
