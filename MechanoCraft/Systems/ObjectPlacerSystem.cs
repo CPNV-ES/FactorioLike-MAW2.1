@@ -60,8 +60,6 @@ namespace MechanoCraft.Systems
         public void Place(Entity entity, Vector2 position)
         {
             CanPlaceObject(entity);
-            int TileX = (int)(position.X / _gridSize.X);
-            int TileY = (int)(position.Y / _gridSize.Y);
             entity.Get<Transform2>().Position = new Vector2((position.X - (position.X % _gridSize.X)) + _gridSize.X / 2, (position.Y - (position.Y % _gridSize.Y)) + _gridSize.Y / 2);
         }
 
