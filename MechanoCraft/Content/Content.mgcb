@@ -1469,6 +1469,18 @@
 #begin GeonBit.UI/themes/hd/ThemeData.xml
 /copy:GeonBit.UI/themes/hd/ThemeData.xml
 
+#begin IronBar.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:IronBar.png
+
 #begin IronOre.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1480,6 +1492,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:IronOre.png
+
+#begin IronPlate.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:IronPlate.png
 
 #begin Miner.png
 /importer:TextureImporter
