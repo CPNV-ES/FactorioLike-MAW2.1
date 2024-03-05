@@ -1,20 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Numerics;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
 using GeonBit.UI;
 using GeonBit.UI.Entities;
-using Microsoft.Xna.Framework.Content;
-using MonoGame.Extended.Entities;
-using MonoGame.Extended.Entities.Systems;
-using GeonBit.UI.Entities.TextValidators;
-using GeonBit.UI.DataTypes;
 using GeonBit.UI.Utils;
-using Entity = GeonBit.UI.Entities.Entity;
 using Microsoft.Xna.Framework.Graphics;
 using MechanoCraft.Inventory.Items;
 

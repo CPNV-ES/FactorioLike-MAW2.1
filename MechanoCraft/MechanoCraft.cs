@@ -8,6 +8,8 @@ using MonoGame.Extended;
 using MonoGame.Extended.Entities;
 using MonoGame.Extended.ViewportAdapters;
 using MechanoCraft.Systems;
+using MechanoCraft.UI;
+using MechanoCraft.Render;
 
 namespace MechanoCraft
 {
@@ -39,6 +41,8 @@ namespace MechanoCraft
                 .AddSystem(new SpriteRenderSystem(GraphicsDevice, _camera))
                 .AddSystem(new ObjectPlacerSystem(_camera, new Vector2(162, 162), Content))
                 .AddSystem(new PlayerUpdateSystem(_camera))
+                .AddSystem(new UIRenderer(GraphicsDevice, Content))
+                .AddSystem(new UIWorldMachine(GraphicsDevice, _camera))
                 .Build();
             Components.Add(_world);
 
