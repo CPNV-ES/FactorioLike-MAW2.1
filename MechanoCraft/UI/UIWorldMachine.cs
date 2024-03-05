@@ -18,12 +18,22 @@ using System.Drawing;
 using MechanoCraft.Input;
 using MechanoCraft.Inventory.Items;
 using MechanoCraft.Entities.Machines;
+using Vector2 = Microsoft.Xna.Framework.Vector2;
+using Rectangle = Microsoft.Xna.Framework.Rectangle;
+using System.Diagnostics;
+using Point = Microsoft.Xna.Framework.Point;
+using MechanoCraft.Entities.Machines;
+using MechanoCraft.Loader;
+using System.Reflection.Metadata;
+using Coroutine;
+using MechanoCraft.Crafting;
+using MechanoCraft.Crafting.Recipes;
 
 namespace MechanoCraft.UI
 {
     public class UIWorldMachine : EntityUpdateSystem
     {
-        bool a = false;
+        bool canCraft = false;
         private readonly GraphicsDevice _graphicsDevice;
         private readonly SpriteBatch _spriteBatch;
 
@@ -33,15 +43,19 @@ namespace MechanoCraft.UI
         private bool hovering;
         private bool createdUI;
         private UIMachineInventory uIMachineInventory;
+        private List<Item> results;
 
         private MouseState currentMouseState;
         private MouseState oldMouseState;
         private Item currentItem;
-        public UIWorldMachine(GraphicsDevice graphicsDevice)
+        private OrthographicCamera camera;
+        private Vector2 worldPos;
+        public UIWorldMachine(GraphicsDevice graphicsDevice, OrthographicCamera camera)
             : base(Aspect.All(typeof(Transform2), typeof(Sprite), typeof(Machine)))
         {
             _graphicsDevice = graphicsDevice;
             _spriteBatch = new SpriteBatch(graphicsDevice);
+            this.camera = camera;
         }
 
         public override void Initialize(IComponentMapperService mapperService)
@@ -50,41 +64,68 @@ namespace MechanoCraft.UI
             _spriteMapper = mapperService.GetMapper<Sprite>();
             _machineMapper = mapperService.GetMapper<Machine>();
             uIMachineInventory = new UIMachineInventory();
+            results = new List<Item>();    
             InputHandler.GetInstance().RegisterLeftMouseButtonListener(() =>
             {
-
-                if (hovering && !createdUI && currentMouseState.LeftButton == ButtonState.Pressed && !(oldMouseState.LeftButton == ButtonState.Pressed))
+                if (!createdUI && hovering && currentItem != null)
                 {
                     uIMachineInventory.BasePanel(currentItem.name);
-                    uIMachineInventory.OneInputOutputUI();
                     createdUI = true;
+                    uIMachineInventory.OneInputOutputUI();
+                    Recipe recipe = Recipes.possibleRecipes[0];
+                    uIMachineInventory.inputItems = recipe.inputs;
+                    uIMachineInventory.ChangeInput(EntityLoadSystem.LoadSprite(uIMachineInventory.inputItems[0].name));
+                    uIMachineInventory.button.OnClick = (GeonBit.UI.Entities.Entity entity) => { canCraft = true; results = CraftingSystem.Craft(recipe, recipe.inputs); };
+                    uIMachineInventory.panel.OnMouseLeave += OnMouseLeaveUI;
                 }
-            });
 
+            });
         }
 
         public override void Update(GameTime gameTime)
         {
             var mouseState = Mouse.GetState();
-            var mousePoint = new Microsoft.Xna.Framework.Point(mouseState.X, mouseState.Y);
             oldMouseState = currentMouseState;
             currentMouseState = Mouse.GetState();
+            hovering = false;
             foreach (var entity in ActiveEntities)
             {
-                currentItem = _machineMapper.Get(entity).Item;
+                
                 var sprite = _spriteMapper.Get(entity);
+                var transform = _transformMapper.Get(entity);
+                var machine = _machineMapper.Get(entity);
+                var vector = camera.ScreenToWorld(mouseState.X, mouseState.Y);
+                var rectangle =  new Rectangle((int)vector.X, (int)vector.Y, sprite.TextureRegion.Texture.Width, sprite.TextureRegion.Texture.Height);
 
-                if (sprite.TextureRegion.Bounds.Contains(mousePoint))
+                if (Intersects(rectangle, (Rectangle)sprite.GetBoundingRectangle(transform))&& machine.IsPlaced)
                 {
+                    currentItem = machine.Item;
                     hovering = true;
                 }
-                else
+            }
+            if (UIMachineInventory.progressBar != null && canCraft)
+            {
+                UIMachineInventory.progressBar.Value += gameTime.ElapsedGameTime.Milliseconds/10;
+                if(UIMachineInventory.progressBar.Value >= 100)
                 {
-                    hovering = false;
-                    createdUI = false;
-                    uIMachineInventory.DeletePanel();
+                    canCraft = false;
+
+                    uIMachineInventory.ChangeOutput(EntityLoadSystem.LoadSprite(results[0].name));
                 }
             }
+        }
+        public static bool Intersects(Rectangle a, Rectangle b)
+        {
+            return a.Intersects(b);
+        }
+        private void OnMouseHoverUI(GeonBit.UI.Entities.Entity entity)
+        {
+            uIMachineInventory.DeletePanel();
+        }
+        private void OnMouseLeaveUI(GeonBit.UI.Entities.Entity entity)
+        {
+            createdUI = false;
+            uIMachineInventory.DeletePanel();
         }
     }
 }
