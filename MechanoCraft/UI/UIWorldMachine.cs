@@ -25,7 +25,6 @@ using Point = Microsoft.Xna.Framework.Point;
 using MechanoCraft.Entities.Machines;
 using MechanoCraft.Loader;
 using System.Reflection.Metadata;
-using Coroutine;
 using MechanoCraft.Crafting;
 using MechanoCraft.Crafting.Recipes;
 
