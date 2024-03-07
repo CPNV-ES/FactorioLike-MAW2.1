@@ -1,11 +1,4 @@
-﻿using MonoGame.Extended.Sprites;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MechanoCraft.Entities.Player
+﻿namespace MechanoCraft.Entities.Player
 {
     public class Player
     {

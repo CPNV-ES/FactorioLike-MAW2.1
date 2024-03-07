@@ -12,10 +12,11 @@ using Rectangle = Microsoft.Xna.Framework.Rectangle;
 using MechanoCraft.Crafting;
 using MechanoCraft.Crafting.Recipes;
 using MechanoCraft.Loader;
+using MechanoCraft.UI;
 
-namespace MechanoCraft.UI
+namespace MechanoCraft.Systems
 {
-    public class UIWorldMachine : EntityUpdateSystem
+    public class UIWorldMachineSystem : EntityUpdateSystem
     {
         bool canCraft = false;
         private readonly GraphicsDevice _graphicsDevice;
@@ -28,10 +29,9 @@ namespace MechanoCraft.UI
         private UIMachineInventory uIMachineInventory;
         private List<Item> results;
 
-        private Item currentItem;
         private OrthographicCamera camera;
 
-        public UIWorldMachine(GraphicsDevice graphicsDevice, OrthographicCamera camera)
+        public UIWorldMachineSystem(GraphicsDevice graphicsDevice, OrthographicCamera camera)
             : base(Aspect.All(typeof(Transform2), typeof(Sprite), typeof(Machine)))
         {
             _graphicsDevice = graphicsDevice;
@@ -45,7 +45,7 @@ namespace MechanoCraft.UI
             _spriteMapper = mapperService.GetMapper<Sprite>();
             _machineMapper = mapperService.GetMapper<Machine>();
             uIMachineInventory = new UIMachineInventory();
-            results = new List<Item>();    
+            results = new List<Item>();
         }
 
         public override void Update(GameTime gameTime)
@@ -74,8 +74,8 @@ namespace MechanoCraft.UI
                             uIMachineInventory.OneInputOutputUI();
                             Recipe recipe = Recipes.possibleRecipes[0];
                             uIMachineInventory.inputItems = recipe.inputs;
-                            uIMachineInventory.ChangeInput(sprite.TextureRegion.Texture);
-                            uIMachineInventory.button.OnClick = (GeonBit.UI.Entities.Entity entity) => { canCraft = true; results = CraftingSystem.Craft(recipe, recipe.inputs); };
+                            uIMachineInventory.ChangeInput(EntityLoadSystem.LoadSprite(uIMachineInventory.inputItems[0].name));
+                            uIMachineInventory.button.OnClick = (entity) => { canCraft = true; results = CraftingSystem.Craft(recipe, recipe.inputs); };
                             uIMachineInventory.panel.OnMouseLeave += OnMouseLeaveUI;
                         }
                     }

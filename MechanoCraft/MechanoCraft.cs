@@ -3,13 +3,12 @@ using Microsoft.Xna.Framework.Graphics;
 using MechanoCraft.Crafting.Recipes;
 using MechanoCraft.Inventory;
 using MonoGame.Extended.Tiled;
-using MechanoCraft.Entities.Player;
 using MonoGame.Extended;
 using MonoGame.Extended.Entities;
 using MonoGame.Extended.ViewportAdapters;
 using MechanoCraft.Systems;
-using MechanoCraft.UI;
 using MechanoCraft.Render;
+using MechanoCraft.Loader;
 
 namespace MechanoCraft
 {
@@ -42,9 +41,10 @@ namespace MechanoCraft
                 .AddSystem(new ObjectPlacerSystem(_camera, new Vector2(162, 162), Content))
                 .AddSystem(new PlayerUpdateSystem(_camera))
                 .AddSystem(new UIRenderer(GraphicsDevice, Content))
-                .AddSystem(new UIWorldMachine(GraphicsDevice, _camera))
+                .AddSystem(new UIWorldMachineSystem(GraphicsDevice, _camera))
                 .Build();
             Components.Add(_world);
+            EntityLoadSystem.content = Content;
 
             base.Initialize();
         }
