@@ -46,7 +46,7 @@ namespace MechanoCraft.UI
 
         private MouseState currentMouseState;
         private MouseState oldMouseState;
-        private Item currentItem;
+        private Machine currentMachine;
         private OrthographicCamera camera;
         private Vector2 worldPos;
         public UIWorldMachine(GraphicsDevice graphicsDevice, OrthographicCamera camera)
@@ -66,12 +66,12 @@ namespace MechanoCraft.UI
             results = new List<Item>();    
             InputHandler.GetInstance().RegisterLeftMouseButtonListener(() =>
             {
-                if (!createdUI && hovering && currentItem != null)
+                if (!createdUI && hovering && currentMachine != null)
                 {
-                    uIMachineInventory.BasePanel(currentItem.name);
+                    uIMachineInventory.BasePanel(currentMachine.Name);
                     createdUI = true;
                     uIMachineInventory.OneInputOutputUI();
-                    Recipe recipe = Recipes.possibleRecipes[0];
+                    Recipe recipe = currentMachine.Recipe;
                     uIMachineInventory.inputItems = recipe.inputs;
                     uIMachineInventory.ChangeInput(EntityLoadSystem.LoadSprite(uIMachineInventory.inputItems[0].name));
                     uIMachineInventory.button.OnClick = (GeonBit.UI.Entities.Entity entity) => { canCraft = true; results = CraftingSystem.Craft(recipe, recipe.inputs); };
@@ -98,7 +98,7 @@ namespace MechanoCraft.UI
 
                 if (Intersects(rectangle, (Rectangle)sprite.GetBoundingRectangle(transform))&& machine.IsPlaced)
                 {
-                    currentItem = machine.Item;
+                    currentMachine = machine;
                     hovering = true;
                 }
             }

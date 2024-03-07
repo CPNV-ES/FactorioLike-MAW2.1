@@ -15,8 +15,9 @@ namespace MechanoCraft.Loader
         {
             Entity entity = _world.CreateEntity();
             entity.Attach(new Transform2());
-            entity.Attach(new Sprite(content.Load<Texture2D>(spriteName)));
+            entity.Attach(new Sprite(LoadSprite(spriteName)));
             entity.Attach(new Machine());
+            entity.Get<Machine>().Name = spriteName;
             return entity;
         }
         public static Texture2D LoadSprite(string spriteName)

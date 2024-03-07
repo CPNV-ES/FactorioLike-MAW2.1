@@ -68,14 +68,39 @@ namespace MechanoCraft
                 .Build();
             Components.Add(_world);
             EntityLoadSystem.content = Content;
+
+
             currentEntity = EntityLoadSystem.LoadSpriteAsEntity("Crafter", _world);
-            
+
+            InputHandler.GetInstance().AddInputListener(Keys.Q, () =>
+            {
+                currentEntity.Get<Machine>().Name = "Crafter";
+                currentEntity.Detach<Sprite>();
+                currentEntity.Attach(new Sprite(EntityLoadSystem.LoadSprite("Crafter")));
+            });
+
+            InputHandler.GetInstance().AddInputListener(Keys.E, () =>
+            {
+                currentEntity.Get<Machine>().Name = "smelter";
+                currentEntity.Detach<Sprite>();
+                currentEntity.Attach(new Sprite(EntityLoadSystem.LoadSprite("smelter")));
+            });
+
             InputHandler.GetInstance().AddInputListener(Keys.Space, () =>
             {   if (placerSystem.CanPlaceObject(currentEntity))
                 {
-                    currentEntity.Get<Machine>().IsPlaced = true;
-                    currentEntity.Get<Machine>().Item = ItemCreator.possibleItems[4];
-                    currentEntity = EntityLoadSystem.LoadSpriteAsEntity("Crafter", _world);
+                    Machine machine = currentEntity.Get<Machine>();
+                    machine.IsPlaced = true;
+                    switch (machine.Name)
+                    {
+                        case "Crafter":
+                            machine.Recipe = Recipes.possibleRecipes[1];
+                            break;
+                        case "smelter":
+                            machine.Recipe = Recipes.possibleRecipes[0];
+                            break;
+                    }
+                    currentEntity = EntityLoadSystem.LoadSpriteAsEntity(machine.Name, _world);
                 }
             });
             InputHandler.GetInstance().AddInputListener(Keys.Escape, () =>
